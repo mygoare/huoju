@@ -8,7 +8,8 @@ class CreateEvents < ActiveRecord::Migration
     	t.boolean			:is_valid
     	t.integer			:favor
     	t.string			:address
-    	t.belongs_to	:user
+
+      t.belongs_to  :user, index: true
 
       t.timestamps
     end
