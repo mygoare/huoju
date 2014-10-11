@@ -21,9 +21,12 @@ ActiveRecord::Schema.define(version: 20141004085811) do
     t.boolean  "is_valid"
     t.integer  "favor"
     t.string   "address"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"
