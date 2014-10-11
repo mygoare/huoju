@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @home = 'Home page'
+    @home = "Home page #{session[:user_id]}, #{session[:user_name]}"
   end
 
   def about

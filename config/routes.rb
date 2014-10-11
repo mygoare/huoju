@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'users/signin' => 'sessions#new'
+  post 'users/signin' => 'sessions#create'
+  get 'users/logout' => 'sessions#destroy'
+
+  get 'users/signup' => 'users#new'
+  post 'users/signup' => 'users#create'
+
 
   root 'home#index'
   get 'about' => 'home#about'
