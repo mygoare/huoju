@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.user_name %>， 欢迎注册 伙聚（huoju.co）</h1>
+    <p>
+      您已经成功注册伙聚，请点击下方链接激活您的账号<br>
+      <a href="<%= @url %>"><%= @url %></a>
+    </p>
+    <p>如果您没有注册伙聚，请忽略该邮件。</p>
+    <span>请不要回复此类邮件</span>
+  </body>
+</html>

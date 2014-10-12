@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
+      UserMailer.welcome_email(@user).deliver
+
       redirect_to '/'
     else
       redirect_to
