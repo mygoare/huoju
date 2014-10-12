@@ -2,7 +2,7 @@
 
 <% if logged_in? %>
 <p><%= @home %> Welcome, <%= current_user.user_name %></p>
-<% link_to "Create Event",  %>
+<% link_to "Create Event" %>
 <% end %>
 
 <%= link_to "Sign up", users_signup_path %>
