@@ -1,4 +1,9 @@
 <h1>Login Page</h1>
 
-<%= form_for :user do |f| %>
+<%= form_for :user do |f|%>
+    Email    : <%= f.text_field :email %><br>
+    Password : <%= f.text_field :pwd %><br>
+    <%= f.submit '登录' %>
 <% end %>
+
+<%= link_to '忘记密码' %>

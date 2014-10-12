@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012095801) do
+ActiveRecord::Schema.define(version: 20141011062344) do
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(version: 20141012095801) do
     t.string   "email"
     t.boolean  "email_valid", default: false
     t.string   "user_name"
-    t.string   "pwd"
+    t.string   "pwd_hash"
+    t.string   "pwd_salt"
     t.string   "avatar"
     t.boolean  "is_valid",    default: true
     t.text     "profile"
     t.string   "sex",         default: "male"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "pwd_salt"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
