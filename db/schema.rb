@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141011044617) do
+ActiveRecord::Schema.define(version: 20141011062344) do
 
   create_table "events", force: true do |t|
     t.string   "title"
     t.text     "content"
     t.string   "category"
     t.string   "cover_image"
-    t.boolean  "is_valid"
+    t.boolean  "is_valid",    default: false
     t.integer  "favor"
     t.string   "address"
     t.integer  "user_id"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20141011044617) do
 
   create_table "users", force: true do |t|
     t.string   "email"
-    t.boolean  "email_valid"
+    t.boolean  "email_valid", default: false
     t.string   "user_name"
     t.string   "pwd"
     t.string   "avatar"
-    t.boolean  "is_valid"
+    t.boolean  "is_valid",    default: true
     t.text     "profile"
-    t.string   "sex"
+    t.string   "sex",         default: "male"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
