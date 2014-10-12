@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'user/signup' => 'users#new'
   post 'user/signup' => 'users#create'
 
+  get 'user/reset-password' => 'users#reset_pwd'
+
   get 'user/:user_name'  => 'users#show'
 
   # events

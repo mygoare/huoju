@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action  :require_login, only: [:new, :create, :show]
+  skip_before_action  :require_login, only: [:new, :create, :show, :reset_pwd]
 
   def new
     if logged_in?
@@ -23,6 +23,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by!(user_name: params[:user_name])
+  end
+
+  def reset_pwd
+
   end
 
   private
