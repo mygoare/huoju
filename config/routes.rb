@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
-  get 'users/signin' => 'sessions#new'
-  post 'users/signin' => 'sessions#create'
-  get 'users/logout' => 'sessions#destroy'
+  get 'event/add' => 'events#add'
+  get 'event/list' => 'events#list'
+  get 'event/:id' => 'events#show'
 
-  get 'users/signup' => 'users#new'
-  post 'users/signup' => 'users#create'
+  # users
+  get 'user/signin' => 'sessions#new'
+  post 'user/signin' => 'sessions#create'
 
+  get 'user/logout' => 'sessions#destroy'
 
+  get 'user/signup' => 'users#new'
+  post 'user/signup' => 'users#create'
+
+  get 'user/:user_name'  => 'users#show'
+
+  # events
+
+  # mainly
   root 'home#index'
   get 'about' => 'home#about'
   get 'contact' => 'home#contact'
