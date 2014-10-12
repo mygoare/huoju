@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user != nil
   end
+
+  before_action :require_login
+
+  private
+
+  def require_login
+    unless logged_in?
+      redirect_to users_signin_path
+    end
+  end
 end
