@@ -11,8 +11,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # raise @user.inspect
       session[:user_id] = @user.id
+
+      # validate email address
       # UserMailer.welcome_email(@user).deliver
 
       redirect_to '/'
