@@ -1,0 +1,6 @@
+<p>重置密码</p>
+
+<%= form_for :user do |f| %>
+    Email: <%= f.text_field :email %><br>
+    <%= f.submit, '找回密码' %>
+<% end %>
