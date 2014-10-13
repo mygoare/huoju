@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "no-reply@huoju.co"
+  default from: "伙聚 Huoju.co<no-reply@huoju.co>"
 
   def welcome_email(user)
     @user = user

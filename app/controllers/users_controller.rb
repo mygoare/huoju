@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
 
       # validate email address
-      # UserMailer.welcome_email(@user).deliver
+      UserMailer.welcome_email(@user).deliver
 
       redirect_to '/'
     else

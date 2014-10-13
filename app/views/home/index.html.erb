@@ -4,6 +4,7 @@
     <p><%= @home %> Welcome, <%= current_user.user_name %></p>
 <% end %>
 
+<%= link_to "Sign up", user_signup_path %>
 <% if logged_in? %>
     <%= link_to "Log out", user_logout_path(current_user.id) %>
 <% else %>
