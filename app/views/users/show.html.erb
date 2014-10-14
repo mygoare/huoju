@@ -1,3 +1,12 @@
 <p>UserName: <%= @user.user_name %></p>
 
 <%= link_to '发起活动', event_add_path %>
+
+<p>修改密码:</p>
+<%= form_tag user_change_password_path, method: "post" do %>
+    <%= hidden_field_tag :user_id, current_user.id %>
+    Current password    :   <%= text_field_tag :current_pwd %><br>
+    New password        :   <%= text_field_tag :new_pwd %><br>
+    Confirm new password:   <%= text_field_tag :confirm_new_pwd %><br>
+    <%= submit_tag "确定" %>
+<% end %>
