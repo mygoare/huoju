@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'user/reset-password' => 'users#reset_pwd'
   post 'user/change-password' => 'users#change_pwd'
 
-  get 'user/:user_name'  => 'users#show'
+  get 'user/:user_name'  => 'users#show', as: 'user_profile'
 
   # events
 
