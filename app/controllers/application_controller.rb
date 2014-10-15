@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
+      # todo: add with redirect_to=user/mygoare
       redirect_to user_signin_path
     end
   end
