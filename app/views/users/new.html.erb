@@ -3,6 +3,6 @@
 <%= form_for :user do |f|%>
     Email    : <%= f.text_field :email %><br>
     User Name: <%= f.text_field :user_name %><br>
-    Password : <%= f.text_field :pwd %><br>
+    Password : <%= f.password_field :pwd %><br>
     <%= f.submit '注册' %>
 <% end %>

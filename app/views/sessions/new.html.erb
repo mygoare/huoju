@@ -2,7 +2,7 @@
 
 <%= form_for :user do |f|%>
     Email    : <%= f.text_field :email %><br>
-    Password : <%= f.text_field :pwd %><br>
+    Password : <%= f.password_field :pwd %><br>
     <%= f.submit '登录' %>
 <% end %>
 
