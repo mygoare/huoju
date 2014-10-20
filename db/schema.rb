@@ -30,21 +30,23 @@ ActiveRecord::Schema.define(version: 20141013141720) do
 
   create_table "users", force: true do |t|
     t.string   "email"
-    t.boolean  "email_valid",     default: false
+    t.boolean  "email_valid",              default: false
     t.string   "user_name"
     t.string   "pwd_hash"
     t.string   "pwd_salt"
     t.string   "avatar"
-    t.boolean  "is_valid",        default: true
+    t.boolean  "is_valid",                 default: true
     t.text     "profile"
-    t.string   "sex",             default: "male"
+    t.string   "sex",                      default: "male"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "pwd_reset_token"
+    t.string   "reset_password_token"
+    t.string   "email_confirmation_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["pwd_reset_token"], name: "index_users_on_pwd_reset_token"
+  add_index "users", ["email_confirmation_token"], name: "index_users_on_email_confirmation_token"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
   add_index "users", ["user_name"], name: "index_users_on_user_name", unique: true
 
 end
