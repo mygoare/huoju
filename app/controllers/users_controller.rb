@@ -44,23 +44,24 @@ class UsersController < ApplicationController
 
     if (current_pwd.empty? or new_pwd.empty? or confirm_new_pwd.empty?)
       flash[:error] = "不得为空,所有都是必填项"
-      redirect_to :back
+      redirect_to :back and return
+    end
 
-    elsif (new_pwd != confirm_new_pwd)
+    if (new_pwd != confirm_new_pwd)
       flash[:error] = "两次秘密输入不一样"
-      redirect_to :back
+      redirect_to :back and return
+    end
 
-
-    elsif ( pwd_hash != BCrypt::Engine.hash_secret(current_pwd, pwd_salt) )
+    if ( pwd_hash != BCrypt::Engine.hash_secret(current_pwd, pwd_salt) )
       flash[:error] = "原密码输入不正确"
-      redirect_to :back
+      redirect_to :back and return
+    end
 
-
-    elsif user.update(pwd: new_pwd)
-      flash[:notice] = "更改密码成功"
+    if user.update(pwd: new_pwd)
+      flash[:notice] = "修改密码成功"
       redirect_to :back
     else
-      flash[:error] = "更改密码失败"
+      flash[:error] = "修改密码失败"
       redirect_to :back
 
     end
