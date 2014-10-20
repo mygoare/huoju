@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'event/add' => 'events#add'
-  get 'event/list' => 'events#list'
-  get 'event/:id' => 'events#show'
+  get 'events/add' => 'events#add', as: 'add_event'
+  get 'events/list' => 'events#list', as: 'list_events'
+  get 'event/:id' => 'events#show', as: 'show_event'
 
   # users
   get 'user/signin' => 'sessions#new'
@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   get 'user/signup' => 'users#new'
   post 'user/signup' => 'users#create'
 
-  get 'user/reset-password' => 'users#reset_pwd'
-  post 'user/change-password' => 'users#change_pwd'
+  get '~:user_name'  => 'users#show', as: 'user_profile'
+  get 'user/profile/edit' => 'users#profile', as: 'edit_user_profile'
+  post 'user/profile/edit' => 'users#profile'
 
-  get 'user/:user_name'  => 'users#show', as: 'user_profile'
+  get 'user/password/new' => 'users#reset_pwd', as: 'user_reset_password'
 
   # events
 

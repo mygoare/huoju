@@ -5,12 +5,11 @@
 <% end %>
 
 <% if logged_in? %>
-    <%= link_to 'Edit Profile', user_profile_path(current_user.user_name) %><br>
+    <%= link_to 'Edit Profile', edit_user_profile_path %><br>
+    <%= link_to 'User Page', user_profile_path(current_user.user_name) %><br>
     <%= link_to "激活邮件", user_logout_path(current_user.id) %><br>
     <%= link_to "Log out", user_logout_path(current_user.id) %><br>
 <% else %>
     <%= link_to "Sign in", user_signin_path %><br>
     <%= link_to "Sign up", user_signup_path %><br>
 <% end %>
-
-<%= link_to "发起活动", event_add_path %>

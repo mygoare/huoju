@@ -1,0 +1,19 @@
+<%= form_tag edit_user_profile_path, method: "post" do %>
+    名字 : <%= text_field_tag :user_name, @user_name %><br>
+    个人介绍 : <%= text_area_tag :profile, @profile %><br>
+    性别 :
+        <%= radio_button_tag :sex, "male", @sex.eql?('male') %>
+        <%= label_tag :sex_male, "male" %>
+        <%= radio_button_tag :sex, "female", @sex.eql?('female') %>
+        <%= label_tag :sex_female, "female" %>
+    <br>
+    <%= submit_tag "更新资料" %>
+<% end %>
+<hr/>
+<p>修改密码:</p>
+<%= form_tag "/user/profile/edit?by=pwd", method: "post" do %>
+    Current password    :   <%= password_field_tag :current_pwd %><br>
+    New password        :   <%= password_field_tag :new_pwd %><br>
+    Confirm new password:   <%= password_field_tag :confirm_new_pwd %><br>
+    <%= submit_tag "修改密码" %>
+<% end %>
