@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   def create
     email = params[:user][:email]
     pwd   = params[:user][:pwd]
+
     if (email.empty? or pwd.empty?)
       flash[:error] = "邮箱或密码不得为空"
       redirect_to :back and return
@@ -18,7 +19,13 @@ class SessionsController < ApplicationController
     if @user
       session[:user_id] = @user.id
       flash[:notice] = "#{@user.user_name}, 欢迎回来"
-      redirect_to '/'
+
+      redir_to_path = cookies[:redir_to]
+      if redir_to_path
+        redirect_to redir_to_path
+      else
+        redirect_to '/'
+      end
     else
       flash[:error] = "邮箱或密码错误!"
       redirect_to :back
