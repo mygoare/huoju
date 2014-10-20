@@ -24,13 +24,13 @@
 }
 .notice
 {
-    background-color: #5cb85c;
+    background-color: $brand-success;
 }
 .error
 {
-    background-color: #d9534f;
+    background-color: $brand-danger;
 }
 .warn
 {
-    background-color: #f0ad4e;
+    background-color: $brand-warning;
 }
