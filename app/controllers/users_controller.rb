@@ -46,6 +46,10 @@ class UsersController < ApplicationController
 
       if @user
         # generate reset_password_token & send email
+        reset_password_change = SecureRandom.urlsafe_base64(48)
+        @user.update!(reset_password_token: reset_password_change)
+        UserMailer.welcome_email(@user).deliver
+
         # email_confirmation_token
       else
         flash[:error] = "该邮箱不存在"

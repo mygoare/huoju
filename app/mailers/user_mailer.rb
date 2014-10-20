@@ -3,6 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
+    raise request
     @url  = 'http://example.com/active_your_account'
     mail(to: @user.email, subject: '欢迎加入 伙聚 大家庭！')
   end
