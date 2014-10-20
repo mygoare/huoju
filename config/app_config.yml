@@ -1,0 +1,11 @@
+defaults: &defaults
+  audiocast_uri_format: http://blablalba/blabbitybla/yadda
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
