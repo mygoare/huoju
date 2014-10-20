@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get 'user/profile/edit' => 'users#profile', as: 'edit_user_profile'
   post 'user/profile/edit' => 'users#profile'
 
-  get 'user/password/new' => 'users#reset_pwd', as: 'user_reset_password'
+  get 'user/password/new' => 'users#reset_password_new'
+  post 'user/password/new' => 'users#reset_password_new', as: 'user_reset_password_new'
+  get 'user/password/edit' => 'users#reset_password_change'
+  post 'user/password/edit' => 'users#reset_password_change', as: 'user_reset_password_change'
 
   # events
 

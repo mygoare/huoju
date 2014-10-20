@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action  :require_login, only: [:new, :create, :show, :reset_pwd]
+  skip_before_action  :require_login, only: [:new, :create, :show, :reset_password_new]
 
   def new
     if logged_in?
@@ -24,7 +24,12 @@ class UsersController < ApplicationController
       # validate email address
       UserMailer.welcome_email(@user).deliver
 
-      redirect_to '/'
+      redir_to_path = cookies[:redir_to]
+      if redir_to_path
+        redirect_to redir_to_path
+      else
+        redirect_to '/'
+      end
     else
       redirect_to :back
     end
@@ -34,11 +39,29 @@ class UsersController < ApplicationController
     @user = User.find_by!(user_name: params[:user_name])
   end
 
-  def reset_pwd
+  def reset_password_new
+    if request.post?
+      email = params[:user][:email]
+      @user = User.find_by(email: email)
 
+      if @user
+        # generate reset_password_token & send email
+        # email_confirmation_token
+      else
+        flash[:error] = "该邮箱不存在"
+      end
+    end
   end
 
-  def change_pwd user
+  def reset_password_change
+    if request.get?
+      reset_password_token = params[:reset_password_token]
+      if reset_password_token
+      end
+    end
+  end
+
+  def change_password user
     pwd_hash        = user.pwd_hash
     pwd_salt        = user.pwd_salt
 
@@ -91,16 +114,16 @@ class UsersController < ApplicationController
     user_id         = session[:user_id]
     user            = User.find(user_id)
 
-    if request.method == 'GET'
+    if request.get?
       @user_name = user.user_name
       @profile = user.profile
       @sex = user.sex
     end
 
 
-    if request.method == 'POST'
+    if request.post?
       if params[:by] and params[:by] == 'pwd'
-        change_pwd user
+        change_password user
       else
         update_profile user
       end
