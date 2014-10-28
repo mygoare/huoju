@@ -45,12 +45,19 @@ class UsersController < ApplicationController
       @user = User.find_by(email: email)
 
       if @user
-        # generate reset_password_token & send email
-        reset_password_change = SecureRandom.urlsafe_base64(48)
-        @user.update!(reset_password_token: reset_password_change)
-        UserMailer.welcome_email(@user).deliver
+        if @user.email_valid
+          # generate reset_password_token & send email
+          reset_password_change = SecureRandom.urlsafe_base64(48)
+          @user.update!(reset_password_token: reset_password_change)
+          UserMailer.reset_password(@user).deliver
 
-        # email_confirmation_token
+          # email_confirmation_token
+
+          redirect_to '/'
+          flash[:notice] = "重置密码邮件发送成功"
+        else
+          flash[:error] = "请先验证邮箱"
+        end
       else
         flash[:error] = "该邮箱不存在"
       end
@@ -61,6 +68,8 @@ class UsersController < ApplicationController
     if request.get?
       reset_password_token = params[:reset_password_token]
       if reset_password_token
+      else
+        redirect_to :back
       end
     end
   end
