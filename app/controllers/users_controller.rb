@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action  :require_login, only: [:new, :create, :show, :reset_password_new]
+  skip_before_action  :require_login, only: [:new, :create, :show, :reset_password_new, :reset_password_change]
 
   def new
     if logged_in?
@@ -66,10 +66,25 @@ class UsersController < ApplicationController
 
   def reset_password_change
     if request.get?
+      @reset_password_token = params[:reset_password_token]
+    end
+
+    if request.post?
       reset_password_token = params[:reset_password_token]
-      if reset_password_token
+      new_password = params[:new_password]
+      confirm_new_password = params[:confirm_new_password]
+
+      @user = User.find_by(reset_password_token: reset_password_token)
+      if reset_password_token and @user and new_password == confirm_new_password
+        @user.update!(pwd_hash: BCrypt::Engine.hash_secret(new_password, @user.pwd_salt))
+
+        @user.update!(reset_password_token: '')
+        session[:user_id] = @user.id
+        flash[:notice] = "#{@user.user_name}, 找回密码成功，欢迎回来"
+        redirect_to '/'
       else
         redirect_to :back
+        flash[:error] = "Reset Password Token 无效"
       end
     end
   end
