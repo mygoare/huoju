@@ -76,9 +76,8 @@ class UsersController < ApplicationController
 
       @user = User.find_by(reset_password_token: reset_password_token)
       if reset_password_token and @user and new_password == confirm_new_password
-        @user.update!(pwd_hash: BCrypt::Engine.hash_secret(new_password, @user.pwd_salt))
+        @user.update!(pwd_hash: BCrypt::Engine.hash_secret(new_password, @user.pwd_salt), reset_password_token: '')
 
-        @user.update!(reset_password_token: '')
         session[:user_id] = @user.id
         flash[:notice] = "#{@user.user_name}, 找回密码成功，欢迎回来"
         redirect_to '/'
@@ -156,6 +155,39 @@ class UsersController < ApplicationController
         update_profile user
       end
     end
+  end
+
+  def confirm_email_send
+    @user = User.find(session[:user_id])
+
+    if @user
+      email_confirmation_token = SecureRandom.urlsafe_base64(48)
+      @user.update!(email_confirmation_token: email_confirmation_token)
+      UserMailer.confirm_email(@user).deliver
+
+      flash[:notice] = "已发送验证邮件到您的邮箱"
+
+      redirect_to '/'
+    else
+      flash[:error] = "用户不存在"
+      session[:user_id] = nil
+
+      redirect_to '/'
+    end
+  end
+
+  def confirm_email
+    email_confirmation_token = params[:email_confirmation_token]
+    @user = User.find_by(email_confirmation_token: email_confirmation_token)
+
+    if @user
+      @user.update!(email_valid: true, email_confirmation_token: '')
+
+      flash[:notice] = "邮箱已验证"
+    else
+      flash[:error] = "Email Confirmation Token 无效"
+    end
+    redirect_to '/'
   end
 
 end

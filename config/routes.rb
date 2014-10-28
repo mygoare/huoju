@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   get 'user/password/edit' => 'users#reset_password_change'
   post 'user/password/edit' => 'users#reset_password_change', as: 'user_reset_password_change'
 
+  get 'user/email/confirm/send' => 'users#confirm_email_send'
+  get 'user/email/confirm' => 'users#confirm_email'
+
   # events
 
   # mainly

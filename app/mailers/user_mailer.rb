@@ -12,4 +12,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: @user.email, subject: '重置密码')
   end
+
+  def confirm_email user
+    @user = user
+    mail(to: @user.email, subject: '验证邮箱')
+  end
 end
