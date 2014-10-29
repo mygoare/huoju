@@ -40,8 +40,8 @@ Rails.application.configure do
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 25,
-    :domain => "huoju.co",
-    :user_name => "postmaster@huoju.co",
-    :password => "77337911bfd76f8e51b9f9370d0a4818"
+    :domain => "email.huoju.co",
+    :user_name => "postmaster@email.huoju.co",
+    :password => "5f3ad64d7cf8e376230ffba3d984e25a"
   }
 end
