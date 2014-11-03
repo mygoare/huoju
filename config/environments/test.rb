@@ -36,4 +36,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :authentication => :plain,
+      :address => "smtp.mailgun.org",
+      :port => 25,
+      :domain => "email.huoju.co",
+      :user_name => "postmaster@email.huoju.co",
+      :password => "5f3ad64d7cf8e376230ffba3d984e25a"
+  }
 end
