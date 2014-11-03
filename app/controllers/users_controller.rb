@@ -9,6 +9,12 @@ class UsersController < ApplicationController
 
   def create
     user_params = params[:user]
+
+    if (!user_params[:user_name].nil? or !user_params[:email].nil? or !user_params[:pwd].nil?)
+      flash[:error] = "邮箱，用户名或密码不得为空"
+      redirect_to :back and return
+    end
+
     pwd_salt = BCrypt::Engine.generate_salt
     pwd_hash = BCrypt::Engine.hash_secret(user_params[:pwd], pwd_salt)
 
